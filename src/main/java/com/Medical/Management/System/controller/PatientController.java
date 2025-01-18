@@ -1,6 +1,7 @@
 package com.Medical.Management.System.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,18 +13,23 @@ import com.Medical.Management.System.repository.PatientRepository;
 @RestController
 @RequestMapping("/api/v1")
 public class PatientController {
-
-    @Autowired
     private PatientRepository patientRepository;
-
-    public PatientController (PatientRepository patientRepository){
+    public  PatientController (PatientRepository patientRepository) {
         super();
         this.patientRepository = patientRepository;
     }
 
     @PostMapping("/insert")
-    public Patient createPatient (@RequestBody Patient patient){
+    public Patient createPatient(@RequestBody Patient patient) {
         return patientRepository.save(patient);
     }
+    
+    public List<Patient> getAllPatients() {
+        return patientRepository.findAll();
+    }
+
+
+
+
 
 }
